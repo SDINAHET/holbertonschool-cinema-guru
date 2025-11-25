@@ -1,0 +1,263 @@
+root@UID7E:/mnt/d/Users/steph/Documents/6ème trimestre/holbertonschool-cinema-guru#
+sudo apt remove cmdtest
+sudo apt autoremove
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libdvdnav4 libdvdread8 libmujs1 libplacebo192 libsixel1 libva-wayland2 mpv
+  python3-brotli python3-cliapp python3-markdown python3-mutagen
+  python3-pycryptodome python3-pyxattr python3-ttystatus python3-websockets
+  rtmpdump
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  cmdtest
+0 upgraded, 0 newly installed, 1 to remove and 89 not upgraded.
+1 not fully installed or removed.
+After this operation, 98.3 kB disk space will be freed.
+Do you want to continue? [Y/n] y
+(Reading database ... 118221 files and directories currently installed.)
+Removing cmdtest (0.32.14.gcdfe14e-2) ...
+Setting up postfix (3.6.4-1ubuntu1.3) ...
+
+Postfix (main.cf) configuration was not changed.  If you need to make changes,
+edit /etc/postfix/main.cf (and others) as needed.  To view Postfix
+configuration values, see postconf(1).
+
+After modifying main.cf, be sure to run 'systemctl reload postfix'.
+
+Running newaliases
+newaliases: fatal: bad string length 0 < 1: mydomain =
+dpkg: error processing package postfix (--configure):
+ installed postfix package post-installation script subprocess returned error exit s
+tatus 75
+Processing triggers for man-db (2.10.2-1) ...
+Errors were encountered while processing:
+ postfix
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages will be REMOVED:
+  libdvdnav4 libdvdread8 libmujs1 libplacebo192 libsixel1 libva-wayland2 mpv
+  python3-brotli python3-cliapp python3-markdown python3-mutagen
+  python3-pycryptodome python3-pyxattr python3-ttystatus python3-websockets
+  rtmpdump
+0 upgraded, 0 newly installed, 16 to remove and 89 not upgraded.
+1 not fully installed or removed.
+After this operation, 18.1 MB disk space will be freed.
+Do you want to continue? [Y/n] y
+(Reading database ... 118196 files and directories currently installed.)
+Removing mpv (0.34.1-1ubuntu3) ...
+Removing libdvdnav4:amd64 (6.1.1-1) ...
+Removing libdvdread8:amd64 (6.1.2-1) ...
+Removing libmujs1:amd64 (1.1.3-3) ...
+Removing libplacebo192:amd64 (4.192.1-1) ...
+Removing libsixel1:amd64 (1.10.3-3) ...
+Removing libva-wayland2:amd64 (2.14.0-1) ...
+Removing python3-brotli (1.0.9-2build6) ...
+Removing python3-cliapp (1.20180812.1-4) ...
+Removing python3-markdown (3.3.6-1) ...
+Removing python3-mutagen (1.45.1-2) ...
+Removing python3-pycryptodome (3.11.0+dfsg1-3ubuntu0.1) ...
+Removing python3-pyxattr:amd64 (0.7.2-2ubuntu2) ...
+Removing python3-ttystatus (0.38-4) ...
+Removing python3-websockets (9.1-1) ...
+Removing rtmpdump (2.4+20151223.gitfa8646d.1-2build4) ...
+Setting up postfix (3.6.4-1ubuntu1.3) ...
+
+Postfix (main.cf) configuration was not changed.  If you need to make changes,
+edit /etc/postfix/main.cf (and others) as needed.  To view Postfix
+configuration values, see postconf(1).
+
+After modifying main.cf, be sure to run 'systemctl reload postfix'.
+
+Running newaliases
+newaliases: fatal: bad string length 0 < 1: mydomain =
+dpkg: error processing package postfix (--configure):
+ installed postfix package post-installation script subprocess returned error exit s
+tatus 75
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.11) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for mailcap (3.70+nmu1ubuntu1) ...
+Errors were encountered while processing:
+ postfix
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+root@UID7E:/mnt/d/Users/steph/Documents/6ème trimestre/holbertonschool-cinema-guru# which yarn
+root@UID7E:/mnt/d/Users/steph/Documents/6ème trimestre/holbertonschool-cinema-guru#
+corepack enable
+corepack prepare yarn@1.22.22 --activate
+Preparing yarn@1.22.22 for immediate activation...
+root@UID7E:/mnt/d/Users/steph/Documents/6ème trimestre/holbertonschool-cinema-guru#
+yarn -v
+! The local project doesn't define a 'packageManager' field. Corepack will now add one referencing yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e.
+! For more details about this field, consult the documentation at https://nodejs.org/api/packages.html#packagemanager
+
+1.22.22
+root@UID7E:/mnt/d/Users/steph/Documents/6ème trimestre/holbertonschool-cinema-guru#
+yarn create vite . --template react
+yarn create v1.22.22
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Installed "create-vite@8.2.0" with binaries:
+      - create-vite
+      - cva
+[##] 2/2│
+◆  Current directory is not empty. Please choose how to proceed:
+│  ● Cancel operation
+│  ○ Remove existing files and continue
+│  ○ Ignore files and continue
+└
+
+##] 2/2│
+◆  Current directory is not empty. Please choose how to proceed:
+│  ○ Cancel operation
+│  ○ Remove existing files and continue
+│  ● Ignore files and continue
+└
+◆  Use rolldown-vite (Experimental)?:
+│  ○ Yes
+│  ● No
+└
+◆  Install with yarn and start now?
+│  ● Yes / ○ No
+
+[##] 2/2│
+◇  Current directory is not empty. Please choose how to proceed:
+│  Ignore files and continue
+│
+◇  Use rolldown-vite (Experimental)?:
+│  No
+│
+◇  Install with yarn and start now?
+│  Yes
+│
+◇  Scaffolding project in /mnt/d/Users/steph/Documents/6ème trimestre/holbertonschool-cinema-guru...
+│
+◇  Installing dependencies with yarn...
+yarn install v1.22.22
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+Done in 83.47s.
+│
+◇  Starting dev server...
+yarn run v1.22.22
+$ vite
+
+  VITE v7.2.4  ready in 1112 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+
+
+
+
+root@UID7E:/mnt/d/Users/steph/Documents/6ème trimestre/holbertonschool-cinema-guru#
+yarn dev
+! The local project doesn't define a 'packageManager' field. Corepack will now add one referencing yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e.
+! For more details about this field, consult the documentation at https://nodejs.org/api/packages.html#packagemanager
+
+yarn run v1.22.22
+$ vite
+
+  VITE v7.2.4  ready in 1271 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+
+
+
+yarn add @fortawesome/fontawesome-svg-core@6.7.0 \
+         @fortawesome/free-solid-svg-icons@6.7.0 \
+         @fortawesome/react-fontawesome@0.2.2 \
+         axios@1.7.7 \
+         lodash@4.17.21 \
+         normalize.css@8.0.1
+
+
+yarn dev
+
+
+root@UID7E:/mnt/d/Users/steph/Documents/6ème trimestre/holbertonschool-cinema-guru# yarn add @fortawesome/fontawesome-svg-core@6.7.0 \
+         @fortawesome/free-solid-svg-icons@6.7.0 \
+         @fortawesome/react-fontawesome@0.2.2 \
+         axios@1.7.7 \
+         lodash@4.17.21 \
+         normalize.css@8.0.1
+yarn add v1.22.22
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+success Saved 28 new dependencies.
+info Direct dependencies
+├─ @fortawesome/fontawesome-svg-core@6.7.0
+├─ @fortawesome/free-solid-svg-icons@6.7.0
+├─ @fortawesome/react-fontawesome@0.2.2
+├─ axios@1.7.7
+├─ lodash@4.17.21
+└─ normalize.css@8.0.1
+info All dependencies
+├─ @fortawesome/fontawesome-svg-core@6.7.0
+├─ @fortawesome/free-solid-svg-icons@6.7.0
+├─ @fortawesome/react-fontawesome@0.2.2
+├─ asynckit@0.4.0
+├─ axios@1.7.7
+├─ call-bind-apply-helpers@1.0.2
+├─ combined-stream@1.0.8
+├─ delayed-stream@1.0.0
+├─ dunder-proto@1.0.1
+├─ es-define-property@1.0.1
+├─ es-object-atoms@1.1.1
+├─ es-set-tostringtag@2.1.0
+├─ follow-redirects@1.15.11
+├─ form-data@4.0.5
+├─ get-intrinsic@1.3.0
+├─ get-proto@1.0.1
+├─ has-symbols@1.1.0
+├─ has-tostringtag@1.0.2
+├─ lodash@4.17.21
+├─ loose-envify@1.4.0
+├─ math-intrinsics@1.1.0
+├─ mime-db@1.52.0
+├─ mime-types@2.1.35
+├─ normalize.css@8.0.1
+├─ object-assign@4.1.1
+├─ prop-types@15.8.1
+├─ proxy-from-env@1.1.0
+└─ react-is@16.13.1
+Done in 49.96s.
+root@UID7E:/mnt/d/Users/steph/Documents/6ème trimestre/holbertonschool-cinema-guru#
+
+root@UID7E:/mnt/d/Users/steph/Documents/6ème trimestre/holbertonschool-cinema-guru#
+yarn dev
+yarn run v1.22.22
+$ vite
+5:49:20 PM [vite] (client) Re-optimizing dependencies because lockfile has changed
+
+  VITE v7.2.4  ready in 1293 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+
+
+
+
+
+
+
+
+
