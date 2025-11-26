@@ -6,8 +6,51 @@ const { Op } = require('@sequelize/core');
 const userTitlesRouter = require('./userTitles')
 const axios = require('axios')
 
+
 router.use('/', userTitlesRouter)
 
+
+/**
+ * @swagger
+ * /api/titles/advancedsearch:
+ *   get:
+ *     summary: Advanced movie search
+ *     tags: [Titles]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - name: maxYear
+ *         in: query
+ *         schema:
+ *           type: integer
+ *         description: Maximum release year
+ *       - name: minYear
+ *         in: query
+ *         schema:
+ *           type: integer
+ *         description: Minimum release year
+ *       - name: genres
+ *         in: query
+ *         schema:
+ *           type: string
+ *         description: Comma-separated genres
+ *       - name: sort
+ *         in: query
+ *         schema:
+ *           type: string
+ *           enum: [oldest, latest, highestrated, lowestrated]
+ *       - name: title
+ *         in: query
+ *         schema:
+ *           type: string
+ *       - name: page
+ *         in: query
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Search results returned
+ */
 router.get('/advancedsearch', verifyToken, async (req, res) => {
     const maxYear = parseInt(req.query.maxYear)
     const minYear = parseInt(req.query.maxYear)

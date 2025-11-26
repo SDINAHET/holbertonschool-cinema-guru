@@ -3,6 +3,33 @@ const router = express.Router()
 const User = require('../../models/User')
 const { generateToken } = require('../../utils/tokens')
 
+/**
+ * @swagger
+ * /api/auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - username
+ *               - password
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: Invalid username format
+ */
+
 router.post('/', async (req, res) => {
     User.create({
         username: req.body.username,

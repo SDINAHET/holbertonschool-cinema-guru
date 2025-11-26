@@ -1,7 +1,8 @@
 # Holberton School Cinema Guru API
+![alt text](image.png)
 This is a simple movies API dedicated for Holberton School React Project Holberton School Cinema Guru
 
-## Response Codes 
+## Response Codes
 ### Response Codes
 ```
 200: Success
@@ -9,7 +10,7 @@ This is a simple movies API dedicated for Holberton School React Project Holbert
 401: Unauthorized
 404: Cannot be found
 405: Method not allowed
-422: Unprocessable Entity 
+422: Unprocessable Entity
 50X: Server Error
 ```
 ### Example Error Message
@@ -35,7 +36,7 @@ Content-Length: xy
 
 {
     "username": "foo",
-    "password": "1234567" 
+    "password": "1234567"
 }
 ```
 **Successful Response:**
@@ -60,7 +61,7 @@ Content-Length: xy
 {
     "message": "Invalid crendetials",
 }
-``` 
+```
 ## Register
 **You send:**  Your  account credentials.
 **You get:** An `API-Token` with wich you can make further actions.
@@ -74,7 +75,7 @@ Content-Length: xy
 
 {
     "username": "foo",
-    "password": "1234567" 
+    "password": "1234567"
 }
 ```
 **Successful Response:**
@@ -99,7 +100,7 @@ Content-Length: xy
 {
     "message": "Invalid username",
 }
-``` 
+```
 ## Auth
 **You send:**  Your login credentials.
 **You get:** Your userId and username.
@@ -114,7 +115,7 @@ Content-Length: xy
 
 {
     "username": "foo",
-    "password": "1234567" 
+    "password": "1234567"
 }
 ```
 **Successful Response:**
@@ -139,7 +140,7 @@ Content-Length: xy
 {
     "message": "Invalid token",
 }
-``` 
+```
 ## Advanced Search
 **You send:**  Filters and the sorting.
 **You get:** List of movies/shows from DB.
@@ -205,7 +206,7 @@ Content-Length: xy
 {
     ...
 }
-``` 
+```
 ## Favorites
 **You send:**  N/A.
 **You get:** List of favorited movies/shows from DB.
@@ -260,7 +261,7 @@ Content-Length: xy
 {
     ...
 }
-``` 
+```
 ## Watch Later
 **You send:**  N/A.
 **You get:** List of movies/shows to watch later from DB.
@@ -315,7 +316,7 @@ Content-Length: xy
 {
     ...
 }
-``` 
+```
 ## Favorite A Movie
 **You send:**  The movie IMDB Id.
 **You get:** List of all favorited movies.
@@ -377,7 +378,7 @@ Content-Length: xy
 {
     ...
 }
-``` 
+```
 ## Add movie to watch later
 **You send:**  The movie IMDB Id.
 **You get:** List of all to watch later movies.
@@ -437,7 +438,7 @@ Content-Length: xy
 {
     ...
 }
-``` 
+```
 ## Remove movie from favorites
 **You send:**  The movie IMDB Id.
 **You get:** List of all favorited movies.
@@ -497,7 +498,7 @@ Content-Length: xy
 {
     ...
 }
-``` 
+```
 ## Remove movie from watch later
 **You send:**  The movie IMDB Id.
 **You get:** List of all to watch later movies.
@@ -557,7 +558,7 @@ Content-Length: xy
 {
     ...
 }
-``` 
+```
 ## User activities
 **You send:**  N/A.
 **You get:** List of recent user activities.
@@ -602,7 +603,7 @@ Content-Length: xy
 {
     ...
 }
-``` 
+```
 
 ## Authors
 

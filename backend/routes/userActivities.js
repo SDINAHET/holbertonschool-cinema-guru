@@ -5,6 +5,19 @@ const User = require('../models/User')
 const { Title } = require('../models/Title')
 const { verifyToken } = require('../utils/tokens')
 
+/**
+ * @swagger
+ * /api/activity:
+ *   get:
+ *     summary: Get all user activity logs
+ *     description: Includes favorites, watch later, and removed items.
+ *     tags: [User Activity]
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Activity list returned
+ */
 router.get('/', verifyToken, (req, res) => {
     UserActivity.findAll({
         include: [{
