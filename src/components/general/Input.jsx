@@ -1,4 +1,7 @@
 // src/components/general/Input.jsx
+import { useState } from "react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import './general.css';
 
 function Input({
@@ -11,6 +14,10 @@ function Input({
   inputAttributes = {},
   validateValue, // ⭐ Nouveau
 }) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const isPasswordField = type === "password";
+
   const handleInput = (event) => {
     let newValue = event.target.value;
 
@@ -23,6 +30,10 @@ function Input({
       setValue(newValue);
     }
   };
+
+
+  const inputType = isPasswordField && showPassword ? "text" : type;
+
 
   //   if (setValue) {
   //     setValue(event.target.value);
@@ -61,12 +72,23 @@ return (
 
       <div className="general-input-wrapper">
         <input
-          type={type}
+          type={inputType}
           value={value}
           onChange={handleInput}
           className="general-input"
           {...inputAttributes}
         />
+
+        {isPasswordField && (
+          <span
+            className="general-password-toggle"
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            <span className="material-icons">
+              {showPassword ? "visibility_off" : "visibility"}
+            </span>
+          </span>
+        )}
       </div>
     </div>
   );

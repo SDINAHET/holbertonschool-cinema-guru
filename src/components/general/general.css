@@ -104,3 +104,36 @@
 .general-searchbar-input::placeholder {
   color: #888;
 }
+
+.general-password-toggle {
+  cursor: pointer;
+  color: #777;            /* gris discret */
+  margin-left: 8px;       /* espace à gauche du champ */
+  font-size: 1rem;
+}
+
+.general-password-toggle:hover {
+  color: #333;            /* plus foncé au hover */
+}
+
+.general-password-toggle {
+  cursor: pointer;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.general-password-toggle .material-icons {
+  font-size: 20px;
+  color: #3d3d3d;   /* gris foncé comme ton image */
+}
+
+.general-password-toggle:hover .material-icons {
+  color: #000;      /* plus foncé au hover */
+}
+
+.general-label-icon {
+  margin-right: 8px;   /* espace entre icône et Username */
+  display: inline-flex;
+  align-items: center;
+}

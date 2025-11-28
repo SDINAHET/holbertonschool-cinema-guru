@@ -128,17 +128,19 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-import Authentication from "./components/Authentication";
+// import Authentication from "./components/Authentication";
+import Dashboard from "./components/Dashboard"; // si pas encore créé, mets un stub
+import Authentication from "./routes/auth/Authentication";
 
 // Petit Dashboard temporaire (en attendant la vraie tâche Dashboard)
-function Dashboard({ userUsername }) {
-  return (
-    <div>
-      <h1>Welcome, {userUsername} 👋</h1>
-      <p>You are logged in to Cinema Guru.</p>
-    </div>
-  );
-}
+// function Dashboard({ userUsername }) {
+//   return (
+//     <div>
+//       <h1>Welcome, {userUsername} 👋</h1>
+//       <p>You are logged in to Cinema Guru.</p>
+//     </div>
+//   );
+// }
 
 function App() {
   // États demandés par la consigne
@@ -186,7 +188,15 @@ function App() {
     return <Dashboard userUsername={userUsernamestring} />;
   }
 
-  return <Authentication />;
+  // return <Authentication />;
+
+  // If not logged in -> show Authentication screen
+  return (
+    <Authentication
+      setIsLoggedIn={setIsLoggedInBoolean}
+      setUserUsername={setUserUsernamestring}
+    />
+  );
 }
 
 export default App;
