@@ -1,7 +1,7 @@
 // src/routes/auth/Authentication.jsx
 import { useState } from 'react';
 import './auth.css';
-import axios from 'axios';           // ⬅️ add this import from 'axios';
+import axios from 'axios';           // ⬅️ add this importrom 'axios';
 import Login from './Login';
 import Register from './Register';
 
