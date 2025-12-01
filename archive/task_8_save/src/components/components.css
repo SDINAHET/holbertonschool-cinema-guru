@@ -1,0 +1,32 @@
+/* src/components/components.css */
+
+/* Élément d'activité */
+.activity-item {
+  list-style: none;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+.activity-text {
+  margin: 0;
+  color: #f5f5f5;
+  line-height: 1.4;
+}
+
+/* Nom de l'utilisateur (rouge) */
+.activity-user {
+  font-weight: 600;
+  color: #e11d21; /* rouge */
+}
+
+/* Titre du film (rouge) */
+.activity-title {
+  font-weight: 600;
+  color: #e11d21;
+}
+
+/* Date en italique gris */
+.activity-date {
+  font-style: italic;
+  color: #c0c0c0;
+}

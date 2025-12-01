@@ -1,0 +1,245 @@
+/* ---------- HEADER ---------- */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 60px;
+  background-color: #171717;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 200;
+  font-family: "Roboto", sans-serif;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo-text {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #ffffff;
+}
+
+.navbar-welcome {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* bouton logout style maquette (fond sombre arrondi) */
+/* .navbar-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+
+  background-color: #262626;
+  color: #e50914;
+  font-size: 0.85rem;
+  cursor: pointer;
+} */
+
+/* "Logout" style lien texte, pas bouton visible */
+.navbar-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;                 /* plus de padding de bouton */
+  border: none;               /* pas de bordure */
+  border-radius: 0;           /* pas d’arrondi */
+  background: transparent;    /* plus de fond gris */
+  color: #e50914;             /* rouge vif par défaut */
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* au survol : juste le texte devient rouge foncé */
+.navbar-logout:hover {
+  color: #b80000;
+}
+
+/* optionnel : enlever l’outline bleu quand on clique */
+.navbar-logout:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+
+.navbar-logout-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* avatar dans le header (si tu utilises une img) */
+.navbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #e50914;
+  object-fit: cover;
+}
+
+/* ---------- SIDEBAR ---------- */
+
+.sidebar {
+  position: fixed;
+  top: 60px;              /* sous le header */
+  left: 0;
+  bottom: 0;
+
+  background-color: #c00000;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  transition: width 0.25s ease;
+  z-index: 150;
+}
+
+/* largeur "fermée" par défaut */
+.sidebar-small {
+  width: 60px;
+}
+
+/* si un jour tu veux la forcer ouverte via JS */
+.sidebar-large {
+  width: 220px;
+}
+
+/* au survol, on se comporte comme ouverte (effet de la maquette) */
+.sidebar:hover {
+  width: 220px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* item principal */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  color: #ffffff;
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+.sidebar-item:hover,
+.sidebar-item.active {
+  background-color: #a00000;
+  opacity: 1;
+}
+
+/* icône PNG */
+.sidebar-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* le texte est masqué quand la barre est fermée */
+.sidebar-text {
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* quand la sidebar s’ouvre (hover ou .sidebar-large), on affiche le texte */
+.sidebar:hover .sidebar-text,
+.sidebar-large .sidebar-text {
+  opacity: 1;
+}
+
+/* ---------- ACTIVITÉS ---------- */
+
+.sidebar-activities {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  background-color: #181818;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* petit exemple si tu veux styliser chaque <li> d'Activity */
+.sidebar-activities li {
+  font-size: 0.75rem;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+/* Par défaut, le bloc est visible */
+.sidebar-activities-container {
+  margin-top: auto;
+  background-color: #000000;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Quand la sidebar est en mode small → on cache Latest Activities */
+.sidebar-small .sidebar-activities-container {
+  display: none;
+}
+
+/* Mais si la sidebar-small est survolée → on le ré-affiche */
+.sidebar-small:hover .sidebar-activities-container {
+  display: block;
+}
+
+.sidebar-activities-title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 10px;
+  border-bottom: 1px solid #333;
+}
+
+.activity-empty {
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 10px;
+}
+
+/* items d'activité */
+.activity-item {
+  margin-bottom: 6px;
+}
+
+.activity-text {
+  color: #ffffff;
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+.activity-user {
+  font-weight: 700;
+}
+
+.activity-title {
+  font-style: italic;
+}
+
+.activity-date {
+  color: #bbbbbb;
+}

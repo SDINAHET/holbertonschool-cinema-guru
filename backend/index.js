@@ -14,7 +14,12 @@ const app = express();
 const corsOptions = {
     origin: 'http://localhost:3000',
 }
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: "GET,POST,PUT,DELETE,PATCH",
+  allowedHeaders: "Content-Type,Authorization",
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -74,6 +79,7 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
  *               example: Swagger UI HTML
  */
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api', cors());
 
 /**
  * 🔌 Routes API existantes
@@ -136,25 +142,27 @@ app.get('/api/health', (req, res) => {
 /**
  * 🗄️ Sequelize init + seed
  */
-sequelize.sync({ force: true })
-    .then(async () => {
-        console.log(`Database & tables created!`);
-        console.log('Postgress Connected');
-        // fs.readFile("dump.sql", 'utf8', async (err, data) => {
-        //     await sequelize.query(data)
-        //     console.log("DB Seeded");
-        // })
-        fs.readFile('dump.sql', 'utf8', async (err, data) => {
-            if (err) {
-                console.error('Error reading dump.sql:', err);
-                return;
-            }
-            await sequelize.query(data);
-            console.log('DB Seeded');
-        });
-    })
-    .catch(err => console.log(err));
+// sequelize.sync({ force: true })
+//     .then(async () => {
+//         console.log(`Database & tables created!`);
+//         console.log('Postgress Connected');
+//         // fs.readFile("dump.sql", 'utf8', async (err, data) => {
+//         //     await sequelize.query(data)
+//         //     console.log("DB Seeded");
+//         // })
+//         fs.readFile('dump.sql', 'utf8', async (err, data) => {
+//             if (err) {
+//                 console.error('Error reading dump.sql:', err);
+//                 return;
+//             }
+//             await sequelize.query(data);
+//             console.log('DB Seeded');
+//         });
+//     })
+//     .catch(err => console.log(err));
 
-const port = process.env.PORT || 8000;
+// const port = process.env.PORT || 8000;
 
 app.listen(port, () => console.log('Server running...'));
+
+sequelize.sync();

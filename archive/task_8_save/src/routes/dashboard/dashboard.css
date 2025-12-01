@@ -1,0 +1,40 @@
+/* src/routes/dashboard/dashboard.css */
+
+/* .dashboard-container {
+  min-height: 100vh;
+  background-color: #111;
+  color: #fff;
+  padding: 20px;
+} */
+
+/* .dashboard-container {
+  min-height: 100vh;
+  background-color: #111;
+  color: #fff;
+  padding-top: 70px;
+} */
+
+/* contenu principal décalé à droite de la sidebar */
+/* .dashboard-content { */
+  /* margin-left: 64px; même largeur que sidebar-small */
+/* } */
+
+/* src/routes/dashboard/dashboard.css */
+
+.dashboard-container {
+  min-height: 100vh;
+  background-color: #262626; /* même fond que le body */
+  color: #ffffff;
+}
+
+/* Contenu principal : sous le header (60px) et à droite de la sidebar (60px) */
+.dashboard-content {
+  margin-top: 60px;   /* header fixe */
+  margin-left: 60px;  /* largeur de .sidebar-small */
+  padding: 20px 40px;
+}
+
+/* Option : quand la sidebar est "ouverte" au hover, on décale un peu plus */
+.sidebar:hover ~ .dashboard-content {
+  margin-left: 220px; /* largeur de la sidebar ouverte */
+}
