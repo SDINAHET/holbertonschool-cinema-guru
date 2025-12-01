@@ -1,0 +1,139 @@
+/* src/components/general/general.css */
+
+.general-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+}
+
+.general-label {
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  color: #f5f5f5;
+}
+
+.general-input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #222;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #444;
+  gap: 6px; /* ajoute un petit espace propre */
+}
+
+.general-icon {
+  display: inline-flex;
+  margin-right: 0.4rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.general-input,
+.general-select,
+.general-searchbar-input {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #f5f5f5;
+  font-size: 0.95rem;
+}
+
+.general-select {
+  background-color: #222;
+  color: #f5f5f5;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  outline: none;
+  font-size: 0.95rem;
+  /* enlever le style natif moche */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* état focus / hover légèrement plus clair */
+.general-select:hover,
+.general-select:focus {
+  border-color: #e53935;
+}
+
+.general-select option {
+  background-color: #222;
+  color: #f5f5f5;
+}
+
+/* Button */
+.general-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background-color: #e53935;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.general-button:hover {
+  background-color: #c62828;
+}
+
+.general-button-icon {
+  margin-right: 0.4rem;
+}
+
+/* Search bar */
+.general-searchbar {
+  display: flex;
+  align-items: center;
+  background-color: #222;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #444;
+}
+
+.general-searchbar-input::placeholder {
+  color: #888;
+}
+
+.general-password-toggle {
+  cursor: pointer;
+  color: #777;            /* gris discret */
+  margin-left: 8px;       /* espace à gauche du champ */
+  font-size: 1rem;
+}
+
+.general-password-toggle:hover {
+  color: #333;            /* plus foncé au hover */
+}
+
+.general-password-toggle {
+  cursor: pointer;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.general-password-toggle .material-icons {
+  font-size: 20px;
+  color: #3d3d3d;   /* gris foncé comme ton image */
+}
+
+.general-password-toggle:hover .material-icons {
+  color: #000;      /* plus foncé au hover */
+}
+
+.general-label-icon {
+  margin-right: 8px;   /* espace entre icône et Username */
+  display: inline-flex;
+  align-items: center;
+}

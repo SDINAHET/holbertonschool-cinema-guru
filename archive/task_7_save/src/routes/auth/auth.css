@@ -1,0 +1,143 @@
+/* src/routes/auth/auth.css */
+
+/* -------- Tabs + carte -------- */
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.auth-card {
+  width: 420px;
+  background: #ffffff;
+  border: 1px solid #202020;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+}
+
+/* retirer tous les contours automatiques des boutons d’onglet */
+.auth-tab,
+.auth-tab:focus,
+.auth-tab:focus-visible,
+.auth-tab:active,
+.auth-tab:hover {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.auth-tab::-moz-focus-inner {
+  border: 0 !important;
+}
+
+.auth-tabs {
+  display: flex;
+  width: 100%;
+  height: 48px;
+  border-radius: 0;
+  border-bottom: 1px solid #202020;
+}
+
+.auth-tab {
+  flex: 1;
+  cursor: pointer;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 16px;
+  background: #d32f2f;
+  color: #ffffff;
+  border-radius: 0;
+}
+
+.auth-tab.active {
+  background: #c62828;
+}
+
+/* -------- Contenu -------- */
+
+.auth-content {
+  padding: 32px 40px 32px;
+}
+
+.auth-title {
+  text-align: center;
+  margin: 0 0 24px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.auth-field {
+  margin-bottom: 18px;
+}
+
+.auth-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.auth-submit {
+  padding: 8px 20px;
+}
+
+/* -------- Style des champs (Username / Password) -------- */
+
+/* wrapper : ligne rouge seulement */
+.auth-card .general-input-wrapper {
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid #e53935 !important;
+  border-radius: 0 !important;
+  padding: 0 0 3px 0 !important;
+}
+
+/* label : gris foncé, aligné à gauche */
+.auth-card .general-label {
+  text-align: left !important;
+  color: #333333 !important;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+/* Icônes (username + password) en rose */
+.auth-card .general-icon,
+.auth-card .general-icon svg {
+  color: #f48fb1 !important;
+}
+
+/* Espaces autour de l’icône */
+.auth-card .general-icon {
+  margin-left: 4px !important;
+  margin-right: 8px !important;
+}
+
+
+/* texte saisi : gris foncé */
+.auth-card .general-input {
+  color: #545454 !important;
+}
+
+/* placeholder : gris clair */
+.auth-card .general-input::placeholder {
+  color: #aaaaaa !important;
+}
+
+/* icône du bouton Sign In en rose aussi */
+.auth-submit svg {
+  color: #f48fb1 !important;
+}
+/* Icône du bouton Sign In en blanc */
+.auth-submit svg {
+  color: #ffffff !important;
+}
+.auth-card .general-label-icon svg {
+  color: #e4c1cd !important;
+}
+
+.auth-actions .auth-submit svg {
+  color: #ffffff !important;
+}
