@@ -1,7 +1,50 @@
-/* src/components/movies/movies.css */
+src/components/movies/movies.css
 
 /* -------- TAGS -------- */
 
+/* --- LISTE DES TAGS (container) --- */
+/* conteneur */
+.tags-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* TAG normal (non sélectionné) */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  cursor: pointer;
+
+  color: #e50914;                /* texte rouge */
+  background-color: transparent; /* fond transparent */
+  border: 1px solid #e50914;      /* contour rouge */
+
+  transition: all 0.2s ease;
+}
+
+/* TAG sélectionné */
+.tag-selected {
+  background-color: #e50914;   /* fond rouge */
+  color: #fff;                 /* texte blanc */
+  border-color: #e50914;
+}
+
+/* Optionnel : petit hover */
+.tag:hover {
+  background-color: #e50914;
+  color: white;
+}
+
+
+/*
 .tag-list {
   list-style: none;
   padding: 0;
@@ -20,16 +63,16 @@
   color: #ffffff;
   border: 1px solid #444;
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-}
+} */
 
-.tag-filter {
+/* .tag-filter { */
   /* style léger spécifique quand utilisé dans le filtre (si besoin) */
-}
+/* } */
 
-.tag-selected {
+/* .tag-selected {
   background-color: #e50914;
   border-color: #e50914;
-}
+} */
 
 /* -------- FILTER -------- */
 
@@ -120,4 +163,87 @@
   padding: 3px 8px;
   border-radius: 10px;
   background-color: #262626;
+}
+
+.movies-list {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px;
+}
+
+/* card au format “vignette” */
+.movie-card {
+  background-color: #202020;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* image */
+.movie-card-image-wrapper {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+
+.movie-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* icônes favoris / watch later */
+.movie-card-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.movie-card-icon {
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.movie-card-icon.active {
+  color: #e50914;
+  opacity: 1;
+}
+
+/* texte */
+.movie-card-body {
+  padding: 8px 10px 12px;
+}
+
+.movie-card-title {
+  font-size: 0.9rem;
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.movie-card-synopsis {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin: 0 0 6px;
+}
+
+/* genres */
+.movie-card-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.movie-card-genre-tag {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 12px;
+  background-color: #b80000;
 }
