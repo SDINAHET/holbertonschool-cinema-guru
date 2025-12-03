@@ -33,8 +33,6 @@ const { generateToken } = require('../../utils/tokens')
  *       401:
  *         description: Invalid username or password
  */
-
-
 router.post('/', async (req, res) => {
     User.findOne({ where: { username: req.body.username } })
         .then(user => {

@@ -152,7 +152,15 @@ function SideBar() {
           data = data.activities;
         }
 
-        setActivities(data || []);
+        // 👉 TRI PAR DATE (plus récent en premier)
+        const sorted = [...(data || [])].sort((a, b) => {
+          const dateA = new Date(a.createdAt || a.date || a.updatedAt);
+          const dateB = new Date(b.createdAt || b.date || b.updatedAt);
+          return dateB - dateA; // décroissant
+        });
+        setActivities(sorted);
+
+        // setActivities(data || []);
         setShowActivities(true);
       } catch (err) {
         console.error('Error fetching activities:', err);
@@ -202,13 +210,29 @@ function SideBar() {
             <p className="activity-empty">No activity yet</p>
           ) : (
             <ul className="sidebar-activities">
+              {activities.slice(0, 10).map((act) => (
+                <Activity key={act.id || `${act.userId}-${act.titleId}-${act.createdAt}`} activity={act} />
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
+      {/* {showActivities && (
+        <div className="sidebar-activities-container">
+          <h2 className="sidebar-activities-title">Latest Activities</h2>
+
+          {activities.length === 0 ? (
+            <p className="activity-empty">No activity yet</p>
+          ) : (
+            <ul className="sidebar-activities">
               {activities.slice(0, 10).map((act, idx) => (
                 <Activity key={idx} activity={act} />
               ))}
             </ul>
           )}
         </div>
-      )}
+      )} */}
     </nav>
   );
 }

@@ -17,7 +17,6 @@ const { verifyToken } = require('../../utils/tokens')
  *       200:
  *         description: List of favorite titles
  */
-
 router.get('/favorite/', verifyToken, (req, res) => {
     User.findOne({ where: { id: req.userId }, include: { model: Title, as: "favorite" } }).then(user => {
         res.send(user.favorite)
@@ -36,7 +35,6 @@ router.get('/favorite/', verifyToken, (req, res) => {
  *       200:
  *         description: List of watch-later items
  */
-
 router.get('/watchLater/', verifyToken, (req, res) => {
     User.findOne({ where: { id: req.userId }, include: { model: Title, as: "watchLater" } }).then(user => {
         res.send(user.watchLater)

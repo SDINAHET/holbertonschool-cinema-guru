@@ -248,6 +248,233 @@
 //   );
 // }
 
+// // src/components/movies/MovieCard.jsx
+// import { useState, useEffect } from "react";
+// import axios from "axios";
+// import "./movies.css";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faStar, faClock } from "@fortawesome/free-solid-svg-icons";
+// import unavailablePoster from "../../assets/unavailable1.png";
+
+// const API_BASE = "http://localhost:8000";
+
+// export default function MovieCard({ movie }) {
+//   const [isFavorite, setIsFavorite] = useState(false);
+//   const [isWatchLater, setIsWatchLater] = useState(false);
+
+//   const { imdbId, title, synopsis, imageurls, genres } = movie;
+
+//   const poster =
+//     Array.isArray(imageurls) && imageurls.length
+//       ? imageurls[0]
+//       : unavailablePoster;
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("accessToken");
+//     if (!token || !imdbId) return;
+
+//     const headers = { Authorization: `Bearer ${token}` };
+
+//     const fetchStatus = async () => {
+//       try {
+//         const [favRes, watchRes] = await Promise.all([
+//           axios.get(`${API_BASE}/api/titles/favorite`, { headers }),
+//           axios.get(`${API_BASE}/api/titles/watchLater`, { headers }),
+//         ]);
+
+//         const favList = favRes.data || [];
+//         const watchList = watchRes.data || [];
+
+//         setIsFavorite(favList.some((m) => m.imdbId === imdbId));
+//         setIsWatchLater(watchList.some((m) => m.imdbId === imdbId));
+//       } catch (err) {
+//         console.error("Error checking favorite/watchLater:", err);
+//       }
+//     };
+
+//     fetchStatus();
+//   }, [imdbId]);
+
+//   const handleClick = async (type) => {
+//     try {
+//       const token = localStorage.getItem("accessToken");
+//       if (!token) return;
+//       const headers = { Authorization: `Bearer ${token}` };
+//       const url = `${API_BASE}/api/titles/${type}/${imdbId}`;
+
+//       if (type === "favorite") {
+//         if (isFavorite) {
+//           await axios.delete(url, { headers });
+//           setIsFavorite(false);
+//         } else {
+//           await axios.post(url, null, { headers });
+//           setIsFavorite(true);
+//         }
+//       } else if (type === "watchLater") {
+//         if (isWatchLater) {
+//           await axios.delete(url, { headers });
+//           setIsWatchLater(false);
+//         } else {
+//           await axios.post(url, null, { headers });
+//           setIsWatchLater(true);
+//         }
+//       }
+//     } catch (err) {
+//       console.error("Error updating movie:", err);
+//     }
+//   };
+
+//   return (
+//     <li className="movie-card">
+//       <div className="movie-card-image-wrapper">
+//         <img className="movie-card-image" src={poster} alt={title} />
+//         <div className="movie-card-actions">
+//           <FontAwesomeIcon
+//             icon={faStar}
+//             className={`movie-card-icon ${isFavorite ? "active" : ""}`}
+//             onClick={() => handleClick("favorite")}
+//           />
+//           <FontAwesomeIcon
+//             icon={faClock}
+//             className={`movie-card-icon ${isWatchLater ? "active" : ""}`}
+//             onClick={() => handleClick("watchLater")}
+//           />
+//         </div>
+//       </div>
+
+//       <div className="movie-card-body">
+//         <h3 className="movie-card-title">{title}</h3>
+//         {synopsis && <p className="movie-card-synopsis">{synopsis}</p>}
+
+//         <div className="movie-card-genres">
+//           {Array.isArray(genres) &&
+//             genres.map((g) => (
+//               <span key={g} className="movie-card-genre-tag">
+//                 {g}
+//               </span>
+//             ))}
+//         </div>
+//       </div>
+//     </li>
+//   );
+// }
+
+// // src/components/movies/MovieCard.jsx
+// import { useState, useEffect } from "react";
+// import axios from "axios";
+// import "./movies.css";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faStar, faClock } from "@fortawesome/free-solid-svg-icons";
+// import unavailablePoster from "../../assets/unavailable1.png";
+
+// const API_BASE = "http://localhost:8000";
+
+// export default function MovieCard({ movie }) {
+//   const [isFavorite, setIsFavorite] = useState(false);
+//   const [isWatchLater, setIsWatchLater] = useState(false);
+
+//   if (!movie) return null;
+
+//   const { imdbId, title, synopsis, imageurls, genres } = movie;
+
+//   const poster =
+//     Array.isArray(imageurls) && imageurls.length > 0
+//       ? imageurls[0]
+//       : unavailablePoster;
+
+//   // Récupère les listes favorites / watchlater pour initialiser l'état
+//   useEffect(() => {
+//     const token = localStorage.getItem("accessToken");
+//     if (!token || !imdbId) return;
+
+//     const headers = { Authorization: `Bearer ${token}` };
+
+//     const fetchStatus = async () => {
+//       try {
+//         const [favRes, watchRes] = await Promise.all([
+//           axios.get(`${API_BASE}/api/titles/favorite/`, { headers }),
+//           axios.get(`${API_BASE}/api/titles/watchlater/`, { headers }),
+//         ]);
+
+//         const favList = favRes.data || [];
+//         const watchList = watchRes.data || [];
+
+//         setIsFavorite(favList.some((m) => m.imdbId === imdbId));
+//         setIsWatchLater(watchList.some((m) => m.imdbId === imdbId));
+//       } catch (err) {
+//         console.error("Error checking favorite/watchlater:", err);
+//       }
+//     };
+
+//     fetchStatus();
+//   }, [imdbId]);
+
+//   // type = "favorite" ou "watchlater"
+//   const handleClick = async (type) => {
+//     try {
+//       const token = localStorage.getItem("accessToken");
+//       if (!token || !imdbId) return;
+
+//       const headers = { Authorization: `Bearer ${token}` };
+//       const url = `${API_BASE}/api/titles/${type}/${imdbId}`;
+
+//       if (type === "favorite") {
+//         if (isFavorite) {
+//           await axios.delete(url, { headers });
+//           setIsFavorite(false);
+//         } else {
+//           await axios.post(url, null, { headers });
+//           setIsFavorite(true);
+//         }
+//       } else if (type === "watchlater") {
+//         if (isWatchLater) {
+//           await axios.delete(url, { headers });
+//           setIsWatchLater(false);
+//         } else {
+//           await axios.post(url, null, { headers });
+//           setIsWatchLater(true);
+//         }
+//       }
+//     } catch (err) {
+//       console.error("Error updating movie:", err);
+//     }
+//   };
+
+//   return (
+//     <li className="movie-card">
+//       <div className="movie-card-image-wrapper">
+//         <img className="movie-card-image" src={poster} alt={title} />
+//         <div className="movie-card-actions">
+//           <FontAwesomeIcon
+//             icon={faStar}
+//             className={`movie-card-icon ${isFavorite ? "active" : ""}`}
+//             onClick={() => handleClick("favorite")}
+//           />
+//           <FontAwesomeIcon
+//             icon={faClock}
+//             className={`movie-card-icon ${isWatchLater ? "active" : ""}`}
+//             onClick={() => handleClick("watchlater")}
+//           />
+//         </div>
+//       </div>
+
+//       <div className="movie-card-body">
+//         <h3 className="movie-card-title">{title}</h3>
+//         {synopsis && <p className="movie-card-synopsis">{synopsis}</p>}
+
+//         <div className="movie-card-genres">
+//           {Array.isArray(genres) &&
+//             genres.map((g) => (
+//               <span key={g} className="movie-card-genre-tag">
+//                 {g}
+//               </span>
+//             ))}
+//         </div>
+//       </div>
+//     </li>
+//   );
+// }
+
 // src/components/movies/MovieCard.jsx
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -262,13 +489,26 @@ export default function MovieCard({ movie }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isWatchLater, setIsWatchLater] = useState(false);
 
-  const { imdbId, title, synopsis, imageurls, genres } = movie;
+  // --- sécuriser les champs du film ---
+  const imdbId = movie?.imdbId;
+  const title = movie?.title || "";
+  const synopsis = movie?.synopsis || "";
+
+  const imageurls = movie?.imageurls;
+  const rawGenres = movie?.genres;
+
+  const genres = Array.isArray(rawGenres)
+    ? rawGenres
+    : typeof rawGenres === "string"
+      ? rawGenres.split(",").map((g) => g.trim()).filter(Boolean)
+      : [];
 
   const poster =
-    Array.isArray(imageurls) && imageurls.length
+    Array.isArray(imageurls) && imageurls.length > 0
       ? imageurls[0]
       : unavailablePoster;
 
+  // --- récupère l'état favorite / watchlater ---
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!token || !imdbId) return;
@@ -279,7 +519,7 @@ export default function MovieCard({ movie }) {
       try {
         const [favRes, watchRes] = await Promise.all([
           axios.get(`${API_BASE}/api/titles/favorite`, { headers }),
-          axios.get(`${API_BASE}/api/titles/watchLater`, { headers }),
+          axios.get(`${API_BASE}/api/titles/watchlater`, { headers }),
         ]);
 
         const favList = favRes.data || [];
@@ -288,20 +528,22 @@ export default function MovieCard({ movie }) {
         setIsFavorite(favList.some((m) => m.imdbId === imdbId));
         setIsWatchLater(watchList.some((m) => m.imdbId === imdbId));
       } catch (err) {
-        console.error("Error checking favorite/watchLater:", err);
+        console.error("Error checking favorite/watchlater:", err);
       }
     };
 
     fetchStatus();
   }, [imdbId]);
 
+  // --- clic sur les icônes ---
   const handleClick = async (type) => {
-    try {
-      const token = localStorage.getItem("accessToken");
-      if (!token) return;
-      const headers = { Authorization: `Bearer ${token}` };
-      const url = `${API_BASE}/api/titles/${type}/${imdbId}`;
+    const token = localStorage.getItem("accessToken");
+    if (!token || !imdbId) return;
 
+    const headers = { Authorization: `Bearer ${token}` };
+    const url = `${API_BASE}/api/titles/${type}/${imdbId}`;
+
+    try {
       if (type === "favorite") {
         if (isFavorite) {
           await axios.delete(url, { headers });
@@ -310,7 +552,7 @@ export default function MovieCard({ movie }) {
           await axios.post(url, null, { headers });
           setIsFavorite(true);
         }
-      } else if (type === "watchLater") {
+      } else if (type === "watchlater") {
         if (isWatchLater) {
           await axios.delete(url, { headers });
           setIsWatchLater(false);
@@ -320,14 +562,18 @@ export default function MovieCard({ movie }) {
         }
       }
     } catch (err) {
-      console.error("Error updating movie:", err);
+      console.error(`Error updating ${type}:`, err);
     }
   };
+
+  // on retourne null UNIQUEMENT après les hooks
+  if (!movie) return null;
 
   return (
     <li className="movie-card">
       <div className="movie-card-image-wrapper">
         <img className="movie-card-image" src={poster} alt={title} />
+
         <div className="movie-card-actions">
           <FontAwesomeIcon
             icon={faStar}
@@ -337,22 +583,24 @@ export default function MovieCard({ movie }) {
           <FontAwesomeIcon
             icon={faClock}
             className={`movie-card-icon ${isWatchLater ? "active" : ""}`}
-            onClick={() => handleClick("watchLater")}
+            onClick={() => handleClick("watchlater")}
           />
         </div>
       </div>
 
       <div className="movie-card-body">
         <h3 className="movie-card-title">{title}</h3>
-        {synopsis && <p className="movie-card-synopsis">{synopsis}</p>}
+
+        {synopsis && (
+          <p className="movie-card-synopsis">{synopsis}</p>
+        )}
 
         <div className="movie-card-genres">
-          {Array.isArray(genres) &&
-            genres.map((g) => (
-              <span key={g} className="movie-card-genre-tag">
-                {g}
-              </span>
-            ))}
+          {genres.map((g) => (
+            <span key={g} className="movie-card-genre-tag">
+              {g}
+            </span>
+          ))}
         </div>
       </div>
     </li>

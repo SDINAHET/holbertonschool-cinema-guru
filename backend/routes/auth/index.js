@@ -9,12 +9,89 @@ apis: [
   './routes/**/*.js'
 ],
 
+
 /**
  * @swagger
  * tags:
  *   name: Auth
  *   description: User authentication and identity verification
  */
+
+/**
+ * @swagger
+ * /api/auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *               username:
+ *                 type: string
+ *                 description: Optional username
+ *     responses:
+ *       201:
+ *         description: User successfully registered
+ *       400:
+ *         description: Invalid input data
+ *       409:
+ *         description: User already exists
+ *       500:
+ *         description: Server error
+ */
+router.use('/register', registerRouter)
+
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Log in and obtain a JWT token
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *     responses:
+ *       200:
+ *         description: Login successful, token returned
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *       401:
+ *         description: Invalid credentials
+ *       500:
+ *         description: Server error
+ */
+router.use('/login', loginRouter)
 
 /**
  * @swagger
@@ -39,10 +116,6 @@ apis: [
  *       401:
  *         description: Invalid or missing token
  */
-
-router.use('/register', registerRouter)
-router.use('/login', loginRouter)
-
 router.post('/', verifyToken, (req, res) => {
     if (req.userId && req.username) {
         res.send({

@@ -147,7 +147,7 @@
 
 .sidebar-item:hover,
 .sidebar-item.active {
-  background-color: #a00000;
+  background-color: #fc4141;
   opacity: 1;
 }
 
@@ -224,6 +224,7 @@
 /* items d'activité */
 .activity-item {
   margin-bottom: 6px;
+  font-style: normal;
 }
 
 .activity-text {
@@ -237,9 +238,11 @@
 }
 
 .activity-title {
-  font-style: italic;
+  /* font-style: italic; */
+  font-style: normal;
 }
 
 .activity-date {
   color: #bbbbbb;
+  font-style: normal;
 }
