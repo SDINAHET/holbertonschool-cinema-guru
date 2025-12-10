@@ -4,106 +4,30 @@ const registerRouter = require('./register')
 const loginRouter = require('./login')
 const { verifyToken } = require('../../utils/tokens')
 
-apis: [
-  './index.js',
-  './routes/**/*.js'
-],
-
+router.use('/register', registerRouter)
+router.use('/login', loginRouter)
 
 /**
  * @swagger
  * tags:
  *   name: Auth
- *   description: User authentication and identity verification
+ *   description: Authentication & user session
  */
-
-/**
- * @swagger
- * /api/auth/register:
- *   post:
- *     summary: Register a new user
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - email
- *               - password
- *             properties:
- *               email:
- *                 type: string
- *                 format: email
- *               password:
- *                 type: string
- *                 format: password
- *               username:
- *                 type: string
- *                 description: Optional username
- *     responses:
- *       201:
- *         description: User successfully registered
- *       400:
- *         description: Invalid input data
- *       409:
- *         description: User already exists
- *       500:
- *         description: Server error
- */
-router.use('/register', registerRouter)
-
-/**
- * @swagger
- * /api/auth/login:
- *   post:
- *     summary: Log in and obtain a JWT token
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - email
- *               - password
- *             properties:
- *               email:
- *                 type: string
- *                 format: email
- *               password:
- *                 type: string
- *                 format: password
- *     responses:
- *       200:
- *         description: Login successful, token returned
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
- *       401:
- *         description: Invalid credentials
- *       500:
- *         description: Server error
- */
-router.use('/login', loginRouter)
 
 /**
  * @swagger
  * /api/auth:
  *   post:
- *     summary: Verify JWT token
+ *     summary: Verify access token
+ *     description: |
+ *       Vérifie le token JWT envoyé par le client et retourne les informations
+ *       de l'utilisateur si le token est valide.
  *     tags: [Auth]
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Token is valid
+ *         description: Token valide, informations utilisateur retournées.
  *         content:
  *           application/json:
  *             schema:
@@ -111,11 +35,22 @@ router.use('/login', loginRouter)
  *               properties:
  *                 userId:
  *                   type: integer
+ *                   example: 1
  *                 username:
  *                   type: string
+ *                   example: johndoe
  *       401:
- *         description: Invalid or missing token
+ *         description: Token invalide ou manquant.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Invalid token
  */
+
 router.post('/', verifyToken, (req, res) => {
     if (req.userId && req.username) {
         res.send({

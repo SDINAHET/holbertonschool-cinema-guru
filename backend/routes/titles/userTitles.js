@@ -7,15 +7,33 @@ const { verifyToken } = require('../../utils/tokens')
 
 /**
  * @swagger
- * /api/titles/favorite:
+ * tags:
+ *   - name: User Titles
+ *     description: User's favorite and watch-later lists
+ */
+
+/**
+ * @swagger
+ * /api/titles/favorite/:
  *   get:
  *     summary: Get user's favorite titles
+ *     description: Retourne la liste des films ajoutés en favoris par l'utilisateur.
  *     tags: [User Titles]
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: List of favorite titles
+ *         description: Liste des films favoris de l'utilisateur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Title'
+ *       401:
+ *         description: Token manquant ou invalide.
+ *       500:
+ *         description: Erreur serveur lors de la récupération des favoris.
  */
 router.get('/favorite/', verifyToken, (req, res) => {
     User.findOne({ where: { id: req.userId }, include: { model: Title, as: "favorite" } }).then(user => {
@@ -25,15 +43,26 @@ router.get('/favorite/', verifyToken, (req, res) => {
 
 /**
  * @swagger
- * /api/titles/watchLater:
+ * /api/titles/watchLater/:
  *   get:
  *     summary: Get user's watch-later list
+ *     description: Liste des films que l'utilisateur souhaite regarder plus tard.
  *     tags: [User Titles]
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: List of watch-later items
+ *         description: Liste des films watch-later de l'utilisateur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Title'
+ *       401:
+ *         description: Token manquant ou invalide.
+ *       500:
+ *         description: Erreur serveur lors de la récupération de la watch-later list.
  */
 router.get('/watchLater/', verifyToken, (req, res) => {
     User.findOne({ where: { id: req.userId }, include: { model: Title, as: "watchLater" } }).then(user => {
@@ -46,16 +75,25 @@ router.get('/watchLater/', verifyToken, (req, res) => {
  * /api/titles/favorite/{imdbId}:
  *   post:
  *     summary: Add movie to favorites
+ *     description: Ajoute un film aux favoris de l'utilisateur connecté.
  *     tags: [User Titles]
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: imdbId
  *         required: true
+ *         schema:
+ *           type: string
+ *           example: tt0133093
+ *         description: Identifiant IMDb du film à ajouter en favoris.
  *     responses:
  *       200:
- *         description: Favorite list updated
+ *         description: Film ajouté aux favoris, liste mise à jour retournée.
+ *       401:
+ *         description: Token manquant ou invalide.
+ *       500:
+ *         description: Erreur serveur lors de l'ajout aux favoris.
  */
 router.post('/favorite/:imdbId', verifyToken, (req, res) => {
     const { imdbId } = req.params
@@ -76,10 +114,26 @@ router.post('/favorite/:imdbId', verifyToken, (req, res) => {
  * @swagger
  * /api/titles/watchlater/{imdbId}:
  *   post:
- *     summary: Add to watch-later list
+ *     summary: Add movie to watch-later list
+ *     description: Ajoute un film à la liste "watch-later" de l'utilisateur.
  *     tags: [User Titles]
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: imdbId
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: tt0133093
+ *         description: Identifiant IMDb du film à ajouter à la watch-later list.
+ *     responses:
+ *       200:
+ *         description: Film ajouté, liste mise à jour retournée.
+ *       401:
+ *         description: Token manquant ou invalide.
+ *       500:
+ *         description: Erreur serveur lors de l'ajout à la watch-later list.
  */
 router.post('/watchlater/:imdbId', verifyToken, (req, res) => {
     const { imdbId } = req.params
@@ -102,10 +156,26 @@ router.post('/watchlater/:imdbId', verifyToken, (req, res) => {
  * @swagger
  * /api/titles/favorite/{imdbId}:
  *   delete:
- *     summary: Remove from favorites
+ *     summary: Remove movie from favorites
+ *     description: Retire un film des favoris de l'utilisateur.
  *     tags: [User Titles]
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: imdbId
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: tt0133093
+ *         description: Identifiant IMDb du film à retirer des favoris.
+ *     responses:
+ *       200:
+ *         description: Activité de suppression enregistrée et retournée.
+ *       401:
+ *         description: Token manquant ou invalide.
+ *       500:
+ *         description: Erreur serveur lors de la suppression des favoris.
  */
 router.delete('/favorite/:imdbId', verifyToken, async (req, res) => {
     const { imdbId } = req.params
@@ -126,10 +196,26 @@ router.delete('/favorite/:imdbId', verifyToken, async (req, res) => {
  * @swagger
  * /api/titles/watchlater/{imdbId}:
  *   delete:
- *     summary: Remove from watch-later list
+ *     summary: Remove movie from watch-later list
+ *     description: Retire un film de la liste "watch-later" de l'utilisateur.
  *     tags: [User Titles]
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: imdbId
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: tt0133093
+ *         description: Identifiant IMDb du film à retirer de la watch-later list.
+ *     responses:
+ *       200:
+ *         description: Activité de suppression enregistrée et retournée.
+ *       401:
+ *         description: Token manquant ou invalide.
+ *       500:
+ *         description: Erreur serveur lors de la suppression de la watch-later list.
  */
 router.delete('/watchlater/:imdbId', verifyToken, async (req, res) => {
     const { imdbId } = req.params

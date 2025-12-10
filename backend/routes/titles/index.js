@@ -9,56 +9,88 @@ const axios = require('axios')
 /**
  * @swagger
  * tags:
- *   name: Titles
- *   description: IMDb titles management
+ *   - name: Titles
+ *     description: Movies catalog and advanced search
  */
 router.use('/', userTitlesRouter)
-
 
 /**
  * @swagger
  * /api/titles/advancedsearch:
  *   get:
  *     summary: Advanced movie search
+ *     description: |
+ *       Recherche avancée de films par titre, genres, année de sortie et tri.
+ *       Les résultats sont paginés par blocs de 50 éléments.
  *     tags: [Titles]
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []
  *     parameters:
- *       - name: maxYear
- *         in: query
- *         schema:
- *           type: integer
- *         description: Maximum release year
- *       - name: minYear
- *         in: query
- *         schema:
- *           type: integer
- *         description: Minimum release year
- *       - name: genres
- *         in: query
+ *       - in: query
+ *         name: title
  *         schema:
  *           type: string
- *         description: Comma-separated genres
- *       - name: sort
- *         in: query
+ *         description: Filtre sur le titre du film (recherche partielle, insensible à la casse).
+ *       - in: query
+ *         name: genres
  *         schema:
  *           type: string
- *           enum: [oldest, latest, highestrated, lowestrated]
- *       - name: title
- *         in: query
- *         schema:
- *           type: string
- *       - name: page
- *         in: query
+ *         description: |
+ *           Liste de genres séparés par des virgules (ex: `Action,Comedy`).
+ *           Chaque genre est mis en forme (première lettre en majuscule).
+ *       - in: query
+ *         name: minYear
  *         schema:
  *           type: integer
+ *           example: 1990
+ *         description: Année minimale de sortie (incluse).
+ *       - in: query
+ *         name: maxYear
+ *         schema:
+ *           type: integer
+ *           example: 2022
+ *         description: Année maximale de sortie (incluse).
+ *       - in: query
+ *         name: sort
+ *         schema:
+ *           type: string
+ *           enum: [oldest, highestrated, lowestrated]
+ *         description: |
+ *           Critère de tri :
+ *           - `oldest` : du plus ancien au plus récent
+ *           - `highestrated` : meilleure note IMDb en premier
+ *           - `lowestrated` : plus faible note IMDb en premier
+ *           - vide (défaut) : du plus récent au plus ancien
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           example: 1
+ *         description: Numéro de page. Chaque page ajoute 50 éléments au résultat.
  *     responses:
  *       200:
- *         description: Search results returned
+ *         description: Liste de films correspondant aux filtres.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 totalCount:
+ *                   type: integer
+ *                   example: 120
+ *                 titles:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Title'
+ *       401:
+ *         description: Token manquant ou invalide.
+ *       500:
+ *         description: Erreur serveur lors de la recherche.
  */
 router.get('/advancedsearch', verifyToken, async (req, res) => {
     const maxYear = parseInt(req.query.maxYear)
-    const minYear = parseInt(req.query.minYear)
+    const minYear = parseInt(req.query.maxYear)
     const genre = req.query.genres ? req.query.genres.split(',').map(genre => genre.charAt(0).toUpperCase() + genre.slice(1)) : []
     const params = {
         maxYear: isNaN(maxYear) ? 2022 : maxYear,
@@ -90,49 +122,37 @@ router.get('/advancedsearch', verifyToken, async (req, res) => {
  * @swagger
  * /api/titles/{imdbId}:
  *   get:
- *     summary: Get one title by IMDb ID
+ *     summary: Get movie details by IMDb ID
+ *     description: Retourne les informations détaillées d'un film à partir de son `imdbId`.
  *     tags: [Titles]
  *     security:
- *       - BearerAuth: []
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: imdbId
  *         required: true
  *         schema:
  *           type: string
- *         description: IMDb identifier (e.g. tt1234567)
+ *           example: tt0133093
+ *         description: Identifiant IMDb du film.
  *     responses:
  *       200:
- *         description: Title found
+ *         description: Film trouvé.
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Title'
  *       404:
- *         description: Title not found
+ *         description: Film non trouvé.
+ *       401:
+ *         description: Token manquant ou invalide.
  *       500:
- *         description: Server error
+ *         description: Erreur serveur lors de la récupération du film.
  */
-// router.get('/:imdbId', verifyToken, (req, res) => {
-//     const { imdbId } = req.params
-//     Title.findOne({ where: { imdbId } }).then(data => res.send(data)).catch(err => res.status(500).send(err))
-// })
-router.get('/:imdbId', verifyToken, async (req, res) => {
-  const { imdbId } = req.params;
-
-  try {
-    const title = await Title.findOne({ where: { imdbId } });
-
-    if (!title) {
-      return res.status(404).json({ message: 'Title not found' });
-    }
-
-    res.json(title);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+router.get('/:imdbId', verifyToken, (req, res) => {
+    const { imdbId } = req.params
+    Title.findOne({ where: { imdbId } }).then(data => res.send(data)).catch(err => res.status(500).send(err))
+})
 
 const getSort = (param) => {
     switch (param) {

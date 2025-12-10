@@ -1,0 +1,68 @@
+# version: '3'
+# services:
+#   node:
+#     restart: always
+#     build: .
+#     environment:
+#       DB_SCHEMA: postgres
+#       DB_USER: postgres
+#       DB_PASSWORD: postgres
+#       DB_HOST: postgres
+#     ports:
+#       - 8000:8000
+#     volumes:
+#       - ./:/code
+#     depends_on: ["postgres"]
+#   postgres:
+#     image: postgres
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#     ports:
+#       - '5432:5432'
+#     volumes:
+#       - node-db:/var/lib/postgresql/data
+# volumes:
+#  node-db:
+
+version: "2.4"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: backend_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"                 # host 5433 -> container 5432
+    volumes:
+      - node-db:/var/lib/postgresql # chemin recommandé
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  node:
+    build: .
+    container_name: backend_node
+    restart: always
+    environment:
+      DB_SCHEMA: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/code
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  node-db:
